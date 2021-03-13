@@ -13,7 +13,7 @@ See the [Usage](#usage) section below if you are planning to develop application
 Debian/Ubuntu/etc:
 
 ```console
-$ ver=0.9
+$ ver=1.0
 $ url=https://github.com/dimitry-ishenko-casparcg/liboscpp/releases/download/v${ver}
 $ wget ${url}/libosc++_${ver}_amd64.deb
 $ sudo apt install ./libosc++_${ver}_amd64.deb
@@ -28,7 +28,7 @@ $ sudo apt install ./libosc++-dev_${ver}_amd64.deb
 RaspberryPi:
 
 ```console
-$ ver=0.9
+$ ver=1.0
 $ url=https://github.com/dimitry-ishenko-casparcg/liboscpp/releases/download/v${ver}
 $ wget ${url}/libosc++_${ver}_armhf.deb
 $ sudo apt install ./libosc++_${ver}_armhf.deb
@@ -45,7 +45,7 @@ $ sudo apt install ./libosc++-dev_${ver}_armhf.deb
 Stable version (requires [CMake](https://cmake.org/) >= 3.1):
 
 ```console
-$ ver=0.9
+$ ver=1.0
 $ wget https://github.com/dimitry-ishenko-casparcg/liboscpp/archive/v${ver}.tar.gz
 $ tar xzf v${ver}.tar.gz
 $ mkdir liboscpp-${ver}/build
