@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16) # focal
-project(osc++ VERSION 1.3)
+project(osc++ VERSION 2.0)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
