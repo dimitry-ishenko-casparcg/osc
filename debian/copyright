@@ -4,7 +4,7 @@ Upstream-Contact: Dimitry Ishenko <dimitry (dot) ishenko (at) (gee) mail (dot) c
 Source: https://github.com/dimitry-ishenko-cpp/osc
 
 Files: *
-Copyright: 2020-2024 Dimitry Ishenko <dimitry (dot) ishenko (at) (gee) mail (dot) com>
+Copyright: 2020-2025 Dimitry Ishenko <dimitry (dot) ishenko (at) (gee) mail (dot) com>
 License: GPL-3+
  This package is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
