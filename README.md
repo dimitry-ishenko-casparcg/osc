@@ -13,25 +13,25 @@ See the [Usage](#usage) section below if you are planning to develop application
 Debian/Ubuntu/etc:
 
 ```shell
-$ sudo add-apt-repository ppa:ppa-verse/casparcg
-$ sudo apt install libosc++
+sudo add-apt-repository ppa:ppa-verse/casparcg
+sudo apt install libosc++
 ```
 
 Install the development package, if you are planning to develop applications with **osc++**:
 ```shell
-$ sudo apt install libosc++-dev
+sudo apt install libosc++-dev
 ```
 
 RaspberryPi:
 
 ```shell
 sudo add-apt-repository -S deb https://ppa.launchpadcontent.net/ppa-verse/casparcg/ubuntu jammy main
-$ sudo apt install libosc++
+sudo apt install libosc++
 ```
 
 Install the development package, if you are planning to develop applications with **osc++**:
 ```shell
-$ sudo apt install libosc++-dev
+sudo apt install libosc++-dev
 ```
 
 ### From source
@@ -39,26 +39,26 @@ $ sudo apt install libosc++-dev
 Stable version (requires [CMake](https://cmake.org/) >= 3.16):
 
 ```shell
-$ p=osc v=2.0
-$ wget https://github.com/dimitry-ishenko-cpp/${p}/archive/v${v}.tar.gz
-$ tar xzf v${v}.tar.gz
-$ mkdir ${p}-${v}/build
-$ cd ${p}-${v}/build
-$ cmake ..
-$ make
-$ sudo make install
+p=osc v=2.0
+wget https://github.com/dimitry-ishenko-cpp/${p}/archive/v${v}.tar.gz
+tar xzf v${v}.tar.gz
+mkdir ${p}-${v}/build
+cd ${p}-${v}/build
+cmake ..
+make
+sudo make install
 ```
 
 Latest master (requires [git](https://git-scm.com/) and [CMake](https://cmake.org/) >= 3.16):
 
 ```shell
-$ p=osc
-$ git clone --recursive https://github.com/dimitry-ishenko-cpp/${p}.git
-$ mkdir ${p}/build
-$ cd ${p}/build
-$ cmake ..
-$ make
-$ sudo make install
+p=osc
+git clone --recursive https://github.com/dimitry-ishenko-cpp/${p}.git
+mkdir ${p}/build
+cd ${p}/build
+cmake ..
+make
+sudo make install
 ```
 
 ## Usage
@@ -98,7 +98,7 @@ All supported data types are encapsulated in the [`osc::value`](https://github.c
 
 ```c++
 osc::value value{ 42 };
-if(value.is_int32()) auto n{ value.to_int32() };
+if(value.is_int32()) auto n = value.to_int32();
 ```
 
 ```c++
@@ -170,7 +170,7 @@ else if(element.is_message())
 
 ## OSC Message
 
-OSC message -- represented by the [`osc::message`](https://github.com/dimitry-ishenko-cpp/osc/blob/master/src/message.hpp) class --  consists of an address pattern followed by zero or more arguments, which are instances of `osc::value`.
+OSC message—represented by the [`osc::message`](https://github.com/dimitry-ishenko-cpp/osc/blob/master/src/message.hpp) class—consists of an address pattern followed by zero or more arguments, which are instances of `osc::value`.
 
 The address pattern starts with `/` (forward slash) and contains one or more nodes separated by `/`. The pattern can be thought of as a path in a tree-like structure with intermediate nodes called _OSC containers_ and leaf nodes called _OSC methods_.
 
@@ -204,7 +204,7 @@ message << true << false << nil << inf << osc::clock::now();
 
 ## OSC Bundle
 
-OSC bundle -- represented by the [`osc::bundle`](https://github.com/dimitry-ishenko-cpp/osc/blob/master/src/bundle.hpp) class -- consists of the `#bundle` keyword, followed by a time tag and zero or more elements.
+OSC bundle—represented by the [`osc::bundle`](https://github.com/dimitry-ishenko-cpp/osc/blob/master/src/bundle.hpp) class—consists of the `#bundle` keyword, followed by a time tag and zero or more elements.
 
 The time tag indicates when the bundle is to be executed. If the time tag is in the past or the bundle was constructed with [osc::immed](https://github.com/dimitry-ishenko-cpp/osc/blob/master/src/types.hpp) time tag (the default), the bundle is to be executed immediately upon receipt.
 
@@ -249,7 +249,7 @@ bundle << (osc::message{ "/do/it/now" } << 1 << 2 << 3)         // execute "now"
 
 ## OSC Client
 
-OSC client -- the one transmitting the packets -- will usually:
+OSC client—the one transmitting the packets—will usually:
 
  - create a message and/or bundle;
  - construct a packet from it;
@@ -284,7 +284,7 @@ socket.send_to(asio::buffer(packet_2.data(), packet_2.size()), remote);
 
 ## OSC Server
 
-OSC server -- the one receiving the packets -- usually will:
+OSC server—the one receiving the packets—usually will:
 
  - receive a packet;
  - parse it to get an instance of `osc::element`;
@@ -326,15 +326,15 @@ socket.async_wait(udp::socket::wait_read, [=](const asio::error_code& ec)
 
         try
         {
-            auto element{ packet.parse() };
+            auto element = packet.parse();
             if(element.is_message())
             {
-                auto message{ bundle.to_message() };
+                auto message = element.to_message();
                 execute(message);
             }
             else if(element.is_bundle())
             {
-                auto bundle{ element.to_bundle() };
+                auto bundle = element.to_bundle();
                 recurse_into(bundle);
             }
         }
@@ -353,20 +353,20 @@ Let's say we want to implement an OSC server that receives bundles, which contai
 
 ```c++
 osc::packet packet{ ... };
-auto bundle{ packet.parse().to_bundle() };
+auto bundle = packet.parse().to_bundle();
 
-auto message{ bundle.element(0).to_message() };
-auto bundle_2{ bundle.element(1).to_bundle() };
+auto message = bundle.element(0).to_message();
+auto bundle_2 = bundle.element(1).to_bundle();
 
-auto message_2{ bundle_2.element(0).to_message() };
-auto message_3{ bundle_2.element(1).to_message() };
+auto message_2 = bundle_2.element(0).to_message();
+auto message_3 = bundle_2.element(1).to_message();
 ```
 
 The above example uses the `element()` function and relies on exceptions. We could instead use `operator>>`:
 
 ```c++
 osc::packet packet{ ... };
-auto element{ packet.parse() };
+auto element = packet.parse();
 
 osc::bundle bundle, bundle_2;
 osc::message message, message_2, message_3;
@@ -380,7 +380,7 @@ We can also use `elements().are<...>()` to check bundle signature and avoid exce
 
 ```c++
 osc::packet packet{ ... };
-auto element{ packet.parse() }; // NB: may throw
+auto element = packet.parse(); // NB: may throw
 
 osc::bundle bundle, bundle_2;
 osc::message message, message_2, message_3;
@@ -409,21 +409,24 @@ message << "The ultimate answer" << 42 << 2.71828 << osc::clock::now();
 
 if(message.values().are<std::string, int, double, osc::time>())
 {
-    std::string v1; int v2; double v3; osc::time v4;
+    std::string v1;
+    int v2;
+    double v3;
+    osc::time v4;
     message >> v1 >> v2 >> v3 >> v4;
 }
 ```
 
 ## Dispatching
 
-**libosc++** provides _OSC message dispatching_ facility described in the OSC specification. Using this facility an OSC server simply needs to:
+**osc++** provides _OSC message dispatching_ facility described in the OSC specification. Using this facility an OSC server simply needs to:
 
  - create an instance of [`osc::address_space`](https://github.com/dimitry-ishenko-cpp/osc/blob/master/src/dispatch.hpp);
  - optionally, supply [`osc::callback_sched`](https://github.com/dimitry-ishenko-cpp/osc/blob/master/src/dispatch.hpp) callback scheduling function;
  - register one or more [`osc::callback`](https://github.com/dimitry-ishenko-cpp/osc/blob/master/src/dispatch.hpp) functions;
  - call [`dispatch()`](https://github.com/dimitry-ishenko-cpp/osc/blob/master/src/dispatch.hpp) for every received packet.
 
-Contrary to the OSC specification though, **libosc++** uses regex for pattern matching within the address space.
+Contrary to the OSC specification though, **osc++** uses regex for pattern matching within the address space.
 
 Example:
 
@@ -442,9 +445,9 @@ void set_coord(const osc::message& message) // callback
         auto coord = message.value(1).to_double();
         switch(message.value(0).to_char())
         {
-        case 'x': x = coord; break;
-        case 'y': y = coord; break;
-        case 'z': z = coord; break;
+            case 'x': x = coord; break;
+            case 'y': y = coord; break;
+            case 'z': z = coord; break;
         }
     }
 }
@@ -494,7 +497,7 @@ NB: Since the extraction operators (`>>`) modify the message, `set_coords()` abo
 [`add(pattern, callback)`](https://github.com/dimitry-ishenko-cpp/osc/blob/master/src/dispatch.hpp)                 | Add `callback` function matching `pattern`.
 [`dispatch(element)`](https://github.com/dimitry-ishenko-cpp/osc/blob/master/src/dispatch.hpp)                      | Dispatch received element.
 
-<sup>2</sup> **libosc++** relies on a user-provided `sched` function to schedule callbacks for future execution. The library itself includes default implementation [`osc::call_immed`](https://github.com/dimitry-ishenko-cpp/osc/blob/master/src/dispatch.hpp), which disregards the time tag and executes the callback immediately.
+<sup>2</sup> **osc++** relies on a user-provided `sched` function to schedule callbacks for future execution. The library itself includes default implementation [`osc::call_immed`](https://github.com/dimitry-ishenko-cpp/osc/blob/master/src/dispatch.hpp), which disregards the time tag and executes the callback immediately.
 
 ## Authors
 
