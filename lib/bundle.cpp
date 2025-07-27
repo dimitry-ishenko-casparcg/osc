@@ -25,7 +25,7 @@ bundle& bundle::operator<<(osc::element e)
 ////////////////////////////////////////////////////////////////////////////////
 bundle& bundle::operator>>(message& m)
 {
-    auto e{ std::move(elements_.front()) };
+    auto e = std::move(elements_.front());
     elements_.pop_front();
 
     m = std::move(e.to_message());
@@ -35,7 +35,7 @@ bundle& bundle::operator>>(message& m)
 ////////////////////////////////////////////////////////////////////////////////
 bundle& bundle::operator>>(bundle& b)
 {
-    auto e{ std::move(elements_.front()) };
+    auto e = std::move(elements_.front());
     elements_.pop_front();
 
     b = std::move(e.to_bundle());
@@ -47,10 +47,10 @@ int32 bundle::space() const
 {
     int32 total = 0;
 
-    total += value::space(string("#bundle"));
+    total += value::space(string{"#bundle"});
     total += value::space(time());
 
-    for(auto const& e : elements()) total += e.space();
+    for(auto&& e : elements()) total += e.space();
 
     return total;
 }
@@ -67,10 +67,10 @@ packet bundle::to_packet() const
 ////////////////////////////////////////////////////////////////////////////////
 void bundle::append_to(packet& p) const
 {
-    value::append_to(p, string("#bundle"));
+    value::append_to(p, string{"#bundle"});
     value::append_to(p, time());
 
-    for(auto const& e : elements()) e.append_to(p);
+    for(auto&& e : elements()) e.append_to(p);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -83,9 +83,9 @@ bool bundle::maybe(packet& p)
 bundle bundle::parse(packet& p)
 {
     auto s = value::parse_string(p);
-    if(s != "#bundle") throw invalid_bundle{ "missing '#bundle'" };
+    if(s != "#bundle") throw invalid_bundle{"missing '#bundle'"};
 
-    bundle b{ value::parse_time(p) };
+    bundle b{value::parse_time(p)};
     while(osc::element::maybe(p)) b << osc::element::parse(p);
 
     return b;

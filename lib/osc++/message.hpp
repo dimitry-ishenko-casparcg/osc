@@ -22,14 +22,16 @@ class packet;
 class message
 {
 public:
+    ////////////////////
     message(string address);
 
-    auto const& address() const { return address_; }
+    ////////////////////
+    auto& address() const { return address_; }
 
-    auto const& values() const { return values_; }
+    auto& values() const { return values_; }
     auto& values() { return values_; }
 
-    auto const& value(std::size_t n) const { return values_[n]; }
+    auto& value(std::size_t n) const { return values_[n]; }
     auto& value(std::size_t n) { return values_[n]; }
 
     message& operator<<(osc::value v)
@@ -41,7 +43,7 @@ public:
     template<typename T>
     message& operator>>(T& x)
     {
-        auto v{ std::move(values_.front()) };
+        auto v = std::move(values_.front());
         values_.pop_front();
 
         x = std::move(v.to<T>());
@@ -51,10 +53,12 @@ public:
     int32 space() const; // space requirement
     packet to_packet() const;
 
+    ////////////////////
     static bool maybe(packet&); // is this packet a message?
     static message parse(packet&);
 
 private:
+    ////////////////////
     string address_;
     osc::values values_;
 

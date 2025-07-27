@@ -26,9 +26,11 @@ class packet;
 class element
 {
 public:
-    element(message m) : element_{ std::move(m) } { }
-    element(bundle  b) : element_{ std::move(b) } { }
+    ////////////////////
+    element(message m) : element_{std::move(m)} { }
+    element(bundle  b) : element_{std::move(b)} { }
 
+    ////////////////////
     template<typename T>
     bool is() const { return std::holds_alternative<T>(element_); }
 
@@ -36,17 +38,19 @@ public:
     bool is_bundle () const { return is<bundle >(); }
 
     template<typename T>
-    auto const& to() const { return std::get<T>(element_); }
+    auto& to() const { return std::get<T>(element_); }
 
-    auto const& to_message() const { return to<message>(); }
-    auto const& to_bundle () const { return to<bundle >(); }
+    auto& to_message() const { return to<message>(); }
+    auto& to_bundle () const { return to<bundle >(); }
 
     int32 space() const; // space requirement
 
+    ////////////////////
     static bool maybe(packet&); // is this packet an element?
     static element parse(packet&);
 
 private:
+    ////////////////////
     std::variant<message, bundle> element_;
 
     void append_to(packet&) const; // append element to packet

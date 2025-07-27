@@ -22,11 +22,13 @@ class element;
 class elements : public std::deque<element>
 {
 public:
+    ////////////////////
     using std::deque<element>::deque;
 
     template<typename... Ts> bool are() const;
 
 private:
+    ////////////////////
     template<std::size_t n, typename T, typename... Us>
     constexpr inline bool are_() const;
 };

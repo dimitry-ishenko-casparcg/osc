@@ -21,9 +21,9 @@ class invalid_value : public std::invalid_argument
 {
 public:
     explicit invalid_value(const std::string& why) :
-        std::invalid_argument{ "Invalid value - " + why }
+        std::invalid_argument{"Invalid value - " + why}
     { }
-    invalid_value() : std::invalid_argument{ "Invalid value" } { }
+    invalid_value() : std::invalid_argument{"Invalid value"} { }
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -31,9 +31,9 @@ class invalid_message : public std::invalid_argument
 {
 public:
     explicit invalid_message(const std::string& why) :
-        std::invalid_argument{ "Invalid message - " + why }
+        std::invalid_argument{"Invalid message - " + why}
     { }
-    invalid_message() : std::invalid_argument{ "Invalid message" } { }
+    invalid_message() : std::invalid_argument{"Invalid message"} { }
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -41,9 +41,9 @@ class invalid_element : public std::invalid_argument
 {
 public:
     explicit invalid_element(const std::string& why) :
-        std::invalid_argument{ "Invalid element - " + why }
+        std::invalid_argument{"Invalid element - " + why}
     { }
-    invalid_element() : std::invalid_argument{ "Invalid element" } { }
+    invalid_element() : std::invalid_argument{"Invalid element"} { }
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -51,9 +51,9 @@ class invalid_bundle : public std::invalid_argument
 {
 public:
     explicit invalid_bundle(const std::string& why) :
-        std::invalid_argument{ "Invalid bundle - " + why }
+        std::invalid_argument{"Invalid bundle - " + why}
     { }
-    invalid_bundle() : std::invalid_argument{ "Invalid bundle" } { }
+    invalid_bundle() : std::invalid_argument{"Invalid bundle"} { }
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -61,9 +61,9 @@ class invalid_packet : public std::invalid_argument
 {
 public:
     explicit invalid_packet(const std::string& why) :
-        std::invalid_argument{ "Invalid packet - " + why }
+        std::invalid_argument{"Invalid packet - " + why}
     { }
-    invalid_packet() : std::invalid_argument{ "Invalid packet" } { }
+    invalid_packet() : std::invalid_argument{"Invalid packet"} { }
 };
 
 ////////////////////////////////////////////////////////////////////////////////

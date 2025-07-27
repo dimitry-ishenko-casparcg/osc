@@ -39,16 +39,19 @@ struct call_immed
 class address_space
 {
 public:
+    ////////////////////
     explicit address_space(callback_sched sched = call_immed{ }) :
-        sched_{ std::move(sched) }
+        sched_{std::move(sched)}
     { }
 
+    ////////////////////
     // NB: the pattern is a regex, which differs from the OSC spec
     void add(const std::string& pattern, callback);
 
     std::size_t dispatch(const element& e) { return dispatch(0, e, immed); }
 
 private:
+    ////////////////////
     callback_sched sched_;
     struct entry
     {

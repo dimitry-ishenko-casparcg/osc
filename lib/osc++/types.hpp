@@ -18,25 +18,23 @@
 namespace osc
 {
 
-using clock = std::chrono::system_clock;
+using clock  = std::chrono::system_clock;
 
-////////////////////////////////////////////////////////////////////////////////
-using int32   = std::int32_t;
-using string  = std::string;
-using blob    = std::vector<char>;
-using int64   = std::int64_t;
-using time    = clock::time_point;
-using null    = std::nullptr_t;
+using int32  = std::int32_t;
+using string = std::string;
+using blob   = std::vector<char>;
+using int64  = std::int64_t;
+using time   = clock::time_point;
+using null   = std::nullptr_t;
 
 struct inf_t { constexpr explicit inf_t() = default; };
 
-////////////////////////////////////////////////////////////////////////////////
 namespace literals
 {
 
 constexpr auto immed = time::min();
 constexpr auto nil = nullptr;
-constexpr inf_t inf { };
+constexpr inf_t inf{ };
 
 }
 using namespace literals;

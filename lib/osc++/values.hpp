@@ -22,6 +22,7 @@ namespace osc
 class values : public std::deque<value>
 {
 public:
+    ////////////////////
     using std::deque<value>::deque;
 
     template<typename... Ts>
@@ -31,6 +32,7 @@ public:
     }
 
 private:
+    ////////////////////
     template<std::size_t n, typename T, typename... Us>
     constexpr inline bool are_() const
     {

@@ -22,20 +22,37 @@ class packet;
 class value
 {
 public:
-    value(int32  i) : tag_{ 'i' }, value_{ i } { }
-    value(float  f) : tag_{ 'f' }, value_{ f } { }
-    value(string s) : tag_{ 's' }, value_{ std::move(s) } { }
-    value(const char* s) : value{ string { s } } { }
-    value(blob   b) : tag_{ 'b' }, value_{ std::move(b) } { }
-    value(int64  i) : tag_{ 'h' }, value_{ i } { }
-    value(time   t) : tag_{ 't' }, value_{ t } { }
-    value(double d) : tag_{ 'd' }, value_{ d } { }
-    value(char   c) : tag_{ 'c' }, value_{ c } { }
-    value(bool   b) : tag_{ b ? 'T' : 'F' }, value_ { b } { }
-    value(null   n) : tag_{ 'N' }, value_{ n } { }
-    value(inf_t  i) : tag_{ 'I' }, value_{ i } { }
+    ////////////////////
+    value(int32  i) : tag_{'i'}, value_{i} { }
+    value(float  f) : tag_{'f'}, value_{f} { }
+    value(string s) : tag_{'s'}, value_{std::move(s)} { }
+    value(const char* s) : value{string{s}} { }
+    value(blob   b) : tag_{'b'}, value_{std::move(b)} { }
+    value(int64  i) : tag_{'h'}, value_{i} { }
+    value(time   t) : tag_{'t'}, value_{t} { }
+    value(double d) : tag_{'d'}, value_{d} { }
+    value(char   c) : tag_{'c'}, value_{c} { }
+    value(bool   b) : tag_{b ? 'T' : 'F'}, value_{b} { }
+    value(null   n) : tag_{'N'}, value_{n} { }
+    value(inf_t  i) : tag_{'I'}, value_{i} { }
 
+    ////////////////////
     auto tag() const { return tag_; }
+
+    template<typename T>
+    auto& to() const { return std::get<T>(value_); }
+
+    auto& to_int32 () const { return to<int32 >(); }
+    auto& to_float () const { return to<float >(); }
+    auto& to_string() const { return to<string>(); }
+    auto& to_blob  () const { return to<blob  >(); }
+    auto& to_int64 () const { return to<int64 >(); }
+    auto& to_time  () const { return to<time  >(); }
+    auto& to_double() const { return to<double>(); }
+    auto& to_char  () const { return to<char  >(); }
+    auto& to_bool  () const { return to<bool  >(); }
+    auto& to_nil   () const { return to<null  >(); }
+    auto& to_inf   () const { return to<inf_t >(); }
 
     template<typename T>
     bool is() const { return std::holds_alternative<T>(value_); }
@@ -54,24 +71,10 @@ public:
     bool is_nil   () const { return is<null  >(); }
     bool is_inf   () const { return is<inf_t >(); }
 
-    template<typename T>
-    auto const& to() const { return std::get<T>(value_); }
-
-    auto const& to_int32 () const { return to<int32 >(); }
-    auto const& to_float () const { return to<float >(); }
-    auto const& to_string() const { return to<string>(); }
-    auto const& to_blob  () const { return to<blob  >(); }
-    auto const& to_int64 () const { return to<int64 >(); }
-    auto const& to_time  () const { return to<time  >(); }
-    auto const& to_double() const { return to<double>(); }
-    auto const& to_char  () const { return to<char  >(); }
-    bool const& to_bool  () const { return to<bool  >(); }
-    auto const& to_nil   () const { return to<null  >(); }
-    auto const& to_inf   () const { return to<inf_t >(); }
-
     int32 space() const; // space requirement
 
 private:
+    ////////////////////
     char tag_;
 
     std::variant<int32, float, string, blob,

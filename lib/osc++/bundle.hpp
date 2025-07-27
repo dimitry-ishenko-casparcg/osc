@@ -23,14 +23,16 @@ class packet;
 class bundle
 {
 public:
-    explicit bundle(osc::time t = immed) : time_{ std::move(t) } { }
+    ////////////////////
+    explicit bundle(osc::time t = immed) : time_{std::move(t)} { }
 
-    auto const& time() const { return time_; }
+    ////////////////////
+    auto& time() const { return time_; }
 
-    auto const& elements() const { return elements_; }
+    auto& elements() const { return elements_; }
     auto& elements() { return elements_; }
 
-    auto const& element(std::size_t n) const { return elements_[n]; }
+    auto& element(std::size_t n) const { return elements_[n]; }
     auto& element(std::size_t n) { return elements_[n]; }
 
     bundle& operator<<(osc::element);
@@ -41,10 +43,12 @@ public:
     int32 space() const; // space requirement
     packet to_packet() const;
 
+    ////////////////////
     static bool maybe(packet&); // is this packet a bundle?
     static bundle parse(packet&);
 
 private:
+    ////////////////////
     osc::time time_;
     osc::elements elements_;
 
