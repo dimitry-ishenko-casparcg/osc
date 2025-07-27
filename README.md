@@ -69,7 +69,15 @@ To use **osc++** in your application simply add:
 #include <osc++.hpp>
 ```
 
-to your file(s) and link with `-losc++`.
+to your file(s) and link with `-losc++`. For [CMake](https://cmake.org/)-based projects use:
+
+```cmake
+find_package(osc++ REQUIRED)
+...
+target_link_libraries(marvin PRIVATE osc++::osc++)
+```
+
+to find the library and link with it. **osc++** additionally exports `osc++::osc++_static` and `osc++::osc++_shared` targets, which you can use to explicitly link with the static and shared versions of the library respectively.
 
 ## Description
 
