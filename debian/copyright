@@ -1,7 +1,7 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: libosc++
+Upstream-Name: osc++
 Upstream-Contact: Dimitry Ishenko <dimitry (dot) ishenko (at) (gee) mail (dot) com>
-Source: https://github.com/dimitry-ishenko-cpp/liboscpp
+Source: https://github.com/dimitry-ishenko-cpp/osc
 
 Files: *
 Copyright: 2020-2024 Dimitry Ishenko <dimitry (dot) ishenko (at) (gee) mail (dot) com>
