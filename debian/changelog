@@ -1,8 +1,22 @@
-osc++ (2.0) UNRELEASED; urgency=medium
+osc++ (2.0) unstable; urgency=medium
 
-  * 
+  * debian: fix README install
+  * debian: install CMake files
+  * CMakeLists: clean-up
+  * README: add find_package example
+  * d/control: clean-up
+  * README: clean-up
+  * Switch to C++23 to avoid platform-dependence
+  * Clean-up
+  * Update copyright years
+  * Switch to new layout
+  * Prepare for v2.0
+  * gitignore: update
+  * src => lib
+  * CMakeLists: fix project name
+  * README: update name & links
 
- -- Dimitry Ishenko <dimitry.ishenko@gmail.com>  Sun, 27 Jul 2025 10:56:35 -0400
+ -- Dimitry Ishenko <dimitry.ishenko@gmail.com>  Sun, 27 Jul 2025 18:49:42 -0400
 
 libosc++ (1.3) unstable; urgency=medium
 
