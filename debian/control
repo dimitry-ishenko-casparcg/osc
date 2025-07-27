@@ -1,9 +1,11 @@
-Source: libosc++
+Source: osc++
 Section: sound
 Priority: optional
 Maintainer: Dimitry Ishenko <dimitry.ishenko@gmail.com>
-Build-Depends: debhelper-compat (= 12), cmake (>= 3.16)
-Standards-Version: 4.6.1
+Build-Depends:
+ debhelper-compat (= 13),
+ cmake (>= 3.16),
+Standards-Version: 4.6.2
 Homepage: https://github.com/dimitry-ishenko-cpp/liboscpp
 Vcs-Browser: https://github.com/dimitry-ishenko-cpp/liboscpp
 Vcs-Git: https://github.com/dimitry-ishenko-cpp/liboscpp.git
@@ -11,7 +13,9 @@ Rules-Requires-Root: no
 
 Package: libosc++
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends:
+ ${shlibs:Depends},
+ ${misc:Depends},
 Description: libosc++ – an OSC Library for C++
  The libosc++ library allows one to easily create and parse OSC (Open Sound
  Control) packets. Ref: http://opensoundcontrol.org/
@@ -23,7 +27,9 @@ Description: libosc++ – an OSC Library for C++
 
 Package: libosc++-dev
 Architecture: any
-Depends: ${misc:Depends}, libosc++ (= ${binary:Version})
+Depends:
+ ${misc:Depends},
+ libosc++ (= ${binary:Version}),
 Description: libosc++ – an OSC Library for C++
  The libosc++ library allows one to easily create and parse OSC (Open Sound
  Control) packets. Ref: http://opensoundcontrol.org/
