@@ -8,27 +8,27 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(HEADERS
-    src/bundle.hpp
-    src/dispatch.hpp
-    src/element.hpp
-    src/elements_0.hpp
-    src/elements.hpp
-    src/errors.hpp
-    src/message.hpp
-    src/packet.hpp
-    src/types.hpp
-    src/value.hpp
-    src/values.hpp
+    lib/bundle.hpp
+    lib/dispatch.hpp
+    lib/element.hpp
+    lib/elements_0.hpp
+    lib/elements.hpp
+    lib/errors.hpp
+    lib/message.hpp
+    lib/packet.hpp
+    lib/types.hpp
+    lib/value.hpp
+    lib/values.hpp
 )
-set(OVERALL_HEADER src/osc++.hpp)
+set(OVERALL_HEADER lib/osc++.hpp)
 
 set(SOURCES
-    src/bundle.cpp
-    src/dispatch.cpp
-    src/element.cpp
-    src/message.cpp
-    src/packet.cpp
-    src/value.cpp
+    lib/bundle.cpp
+    lib/dispatch.cpp
+    lib/element.cpp
+    lib/message.cpp
+    lib/packet.cpp
+    lib/value.cpp
 )
 
 include(GNUInstallDirs)
