@@ -5,9 +5,9 @@
 // Distributed under the GNU GPL license. See the LICENSE.md file for details.
 
 ////////////////////////////////////////////////////////////////////////////////
-#include "errors.hpp"
-#include "packet.hpp"
-#include "value.hpp"
+#include "osc++/errors.hpp"
+#include "osc++/packet.hpp"
+#include "osc++/value.hpp"
 
 #include <algorithm>
 #include <endian.h>

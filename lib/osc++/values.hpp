@@ -5,46 +5,39 @@
 // Distributed under the GNU GPL license. See the LICENSE.md file for details.
 
 ////////////////////////////////////////////////////////////////////////////////
-#ifndef OSC_PACKET_HPP
-#define OSC_PACKET_HPP
+#ifndef OSC_VALUES_HPP
+#define OSC_VALUES_HPP
 
 ////////////////////////////////////////////////////////////////////////////////
-#include "types.hpp"
-#include <vector>
+#include "osc++/types.hpp"
+#include "osc++/value.hpp"
+
+#include <deque>
 
 ////////////////////////////////////////////////////////////////////////////////
 namespace osc
 {
 
-class element;
-class message;
-
 ////////////////////////////////////////////////////////////////////////////////
-class packet
+class values : public std::deque<value>
 {
 public:
-    packet() = default;
-    explicit packet(int32 size) : data_(size) { }
-    packet(const char* data, int32 size) : packet{ data, data + size } { }
-    packet(const char* begin, const char* end) : data_{ begin, end } { }
+    using std::deque<value>::deque;
 
-    const char* data() const { return data_.data(); }
-    char* data() { return data_.data(); }
-
-    int32 size() const { return data_.size(); }
-    void resize(int32 size) { data_.resize(size); }
-    void clear() { data_.clear(); }
-
-    element parse();
+    template<typename... Ts>
+    bool are() const
+    {
+        return size() == sizeof...(Ts) && are_<0, Ts...>();
+    }
 
 private:
-    std::vector<char> data_;
-    void append(const char*, int32);
-
-    friend class bundle;
-    friend class element;
-    friend class message;
-    friend class value;
+    template<std::size_t n, typename T, typename... Us>
+    constexpr inline bool are_() const
+    {
+        if constexpr (sizeof...(Us))
+            return (*this)[n].is<T>() && are_<n+1, Us...>();
+        else return (*this)[n].is<T>();
+    }
 };
 
 ////////////////////////////////////////////////////////////////////////////////

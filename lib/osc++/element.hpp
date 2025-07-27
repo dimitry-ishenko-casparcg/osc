@@ -9,9 +9,9 @@
 #define OSC_ELEMENT_HPP
 
 ////////////////////////////////////////////////////////////////////////////////
-#include "bundle.hpp"
-#include "message.hpp"
-#include "types.hpp"
+#include "osc++/bundle.hpp"
+#include "osc++/message.hpp"
+#include "osc++/types.hpp"
 
 #include <variant>
 

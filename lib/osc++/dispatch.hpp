@@ -9,9 +9,9 @@
 #define OSC_DISPATCH_HPP
 
 ////////////////////////////////////////////////////////////////////////////////
-#include "element.hpp"
-#include "message.hpp"
-#include "types.hpp" // time
+#include "osc++/element.hpp"
+#include "osc++/message.hpp"
+#include "osc++/types.hpp" // time
 
 #include <cstddef> // std::size_t
 #include <functional>

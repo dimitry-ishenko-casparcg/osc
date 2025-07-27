@@ -5,11 +5,11 @@
 // Distributed under the GNU GPL license. See the LICENSE.md file for details.
 
 ////////////////////////////////////////////////////////////////////////////////
-#include "bundle.hpp"
-#include "elements.hpp"
-#include "errors.hpp"
-#include "packet.hpp"
-#include "value.hpp"
+#include "osc++/bundle.hpp"
+#include "osc++/elements.hpp"
+#include "osc++/errors.hpp"
+#include "osc++/packet.hpp"
+#include "osc++/value.hpp"
 
 ////////////////////////////////////////////////////////////////////////////////
 namespace osc
