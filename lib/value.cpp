@@ -10,11 +10,30 @@
 #include "osc++/value.hpp"
 
 #include <algorithm>
-#include <endian.h>
+#include <bit>
+#include <concepts>
 
 ////////////////////////////////////////////////////////////////////////////////
 namespace osc
 {
+
+////////////////////////////////////////////////////////////////////////////////
+namespace 
+{
+
+template<std::integral T>
+constexpr auto htobe(T val) noexcept
+{
+    return std::endian::native == std::endian::little ? std::byteswap(val) : val;
+}
+
+template<std::integral T>
+constexpr auto betoh(T val) noexcept
+{
+    return std::endian::native == std::endian::little ? std::byteswap(val) : val;
+}
+
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 int32 value::space() const
@@ -53,7 +72,7 @@ void value::append_to(packet& pkt) const
 ////////////////////////////////////////////////////////////////////////////////
 void value::append_to(packet& p, int32 i)
 {
-    i = htobe32(i);
+    i = htobe(i);
     p.append(reinterpret_cast<char*>(&i), sizeof(i));
 }
 
@@ -83,7 +102,7 @@ void value::append_to(packet& p, blob b)
 ////////////////////////////////////////////////////////////////////////////////
 void value::append_to(packet& p, int64 i)
 {
-    i = htobe64(i);
+    i = htobe(i);
     p.append(reinterpret_cast<char*>(&i), sizeof(i));
 }
 
@@ -149,7 +168,7 @@ int32 value::parse_int32(packet& p)
 {
     if(p.data_.size() < sizeof(int32)) throw invalid_packet{"incomplete (int32)"};
 
-    int32 i = be32toh(*reinterpret_cast<int32*>(p.data_.data()));
+    int32 i = betoh(*reinterpret_cast<int32*>(p.data_.data()));
     p.data_.erase(p.data_.begin(), p.data_.begin() + sizeof(int32));
 
     return i;
@@ -197,7 +216,7 @@ int64 value::parse_int64(packet& p)
 {
     if(p.data_.size() < sizeof(int64)) throw invalid_packet{"incomplete (int64)"};
 
-    int64 i = be64toh(*reinterpret_cast<int64*>(p.data_.data()));
+    int64 i = betoh(*reinterpret_cast<int64*>(p.data_.data()));
     p.data_.erase(p.data_.begin(), p.data_.begin() + sizeof(int64));
 
     return i;
