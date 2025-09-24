@@ -1,3 +1,9 @@
+osc++ (2.0.1) unstable; urgency=medium
+
+  * d/control: update
+
+ -- Dimitry Ishenko <dimitry.ishenko@gmail.com>  Wed, 24 Sep 2025 17:33:13 -0400
+
 osc++ (2.0) unstable; urgency=medium
 
   * debian: fix README install
