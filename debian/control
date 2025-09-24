@@ -6,18 +6,19 @@ Build-Depends:
  debhelper-compat (= 13),
  cmake (>= 3.16),
 Standards-Version: 4.6.2
-Homepage: https://github.com/dimitry-ishenko-cpp/liboscpp
-Vcs-Browser: https://github.com/dimitry-ishenko-cpp/liboscpp
-Vcs-Git: https://github.com/dimitry-ishenko-cpp/liboscpp.git
+Homepage: https://github.com/dimitry-ishenko-cpp/osc
+Vcs-Browser: https://github.com/dimitry-ishenko-cpp/osc
+Vcs-Git: https://github.com/dimitry-ishenko-cpp/osc.git
 Rules-Requires-Root: no
 
 Package: libosc++
+Section: libs
 Architecture: any
 Depends:
- ${shlibs:Depends},
  ${misc:Depends},
-Description: libosc++ – an OSC Library for C++
- The libosc++ library allows one to easily create and parse OSC (Open Sound
+ ${shlibs:Depends},
+Description: osc++ – an OSC Library for C++
+ The osc++ library allows one to easily create and parse OSC (Open Sound
  Control) packets. Ref: http://opensoundcontrol.org/
  .
  OSC is an open, transport-independent, message-based protocol developed for
@@ -26,12 +27,13 @@ Description: libosc++ – an OSC Library for C++
  This package contains the shared library.
 
 Package: libosc++-dev
+Section: libdevel
 Architecture: any
 Depends:
  ${misc:Depends},
  libosc++ (= ${binary:Version}),
-Description: libosc++ – an OSC Library for C++
- The libosc++ library allows one to easily create and parse OSC (Open Sound
+Description: osc++ – an OSC Library for C++
+ The osc++ library allows one to easily create and parse OSC (Open Sound
  Control) packets. Ref: http://opensoundcontrol.org/
  .
  OSC is an open, transport-independent, message-based protocol developed for
